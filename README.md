@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ipangax
 
 A programming language created by Elisandro Ipanga. Simple syntax, native performance as a
@@ -84,3 +85,6 @@ Rebuild it after changing the compiler: `make static`.
 Playground limits: 20 KB source, 100 KB input, 5 s, 256 KB output, 5 million statement steps,
 call depth 1000, arrays up to 1 million elements, strings up to 10 million characters. Each run is a separate short-lived process in the Netlify
 function sandbox. Opening `playground.html` straight from disk cannot run code.
+=======
+# Ipangax-
+>>>>>>> 7d294d4d6679b4bb875d5a9c9fcceda0eb0a8057
