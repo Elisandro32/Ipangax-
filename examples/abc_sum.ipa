@@ -1,0 +1,16 @@
+// Reads n, then n numbers on the next line. Prints the sum, min and max.
+n = int(input())
+nums = split(input())
+
+total = 0
+smallest = int(nums[0])
+biggest = int(nums[0])
+for word in nums {
+    x = int(word)
+    total = total + x
+    smallest = min(smallest, x)
+    biggest = max(biggest, x)
+}
+
+print(total)
+print(string(smallest) + " " + string(biggest))

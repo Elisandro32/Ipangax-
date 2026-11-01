@@ -1,0 +1,17 @@
+// Prefix sums and a 2D table.
+int[] a = [5, 3, 8, 1]
+prefix = make(len(a) + 1, 0)
+for i in range(len(a)) {
+    prefix[i + 1] = prefix[i] + a[i]
+}
+print(prefix)
+
+grid = make(3, make(3, 0))
+for r in range(3) {
+    for c in range(3) {
+        grid[r][c] = r * c
+    }
+}
+print(grid)
+sort(a)
+print(a)

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Playground - Ipangax</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap"><a class="logo" href="index.html">Ipangax</a><nav><a href="index.html">Home</a><a href="index.html#language">Language</a><a href="docs.html">Documentation</a><a href="playground.html">Playground</a><span class="off" title="Not implemented yet">VS Code (soon)</span><span class="off" title="Not published yet">GitHub (soon)</span></nav><a class="btn" href="playground.html">Try Ipangax</a></div></header>
+<main class="wrap pg"><h2>Ipangax Playground</h2>
+<p style="color:var(--mut);margin:0">Code runs on the server with the real Ipangax interpreter. Ctrl+Enter runs. Text in the Input box is what input() reads. There is no syntax highlighting yet.</p>
+<div class="bar"><button id="run">Run</button><button id="check" class="alt">Check</button><button id="clear" class="alt">Clear</button><span id="st"></span></div>
+<div class="ide"><div class="files">Files<b>main.ipa</b><small>.ipa</small></div>
+<div class="ed"><pre id="gutter">1</pre><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Ipangax source code"></textarea></div></div>
+<h3 style="margin:16px 0 6px">Input (read by input())</h3>
+<textarea id="stdin" class="stdin" spellcheck="false" aria-label="Program input"></textarea>
+<div class="out"><h3>Output</h3><pre id="out"></pre><h3>Errors</h3><pre id="err"></pre></div>
+</main>
+<footer><div class="wrap"><p><b>Ipangax</b><br>Programming language and development tools.</p><p><a href="docs.html">Documentation</a><span class="off">GitHub (soon)</span><a href="playground.html">Playground</a><span class="off">VS Code (soon)</span></p><p>Developed by Elisandro Ipanga</p></div></footer>
+<script src="playground.js"></script>
+<script src="config.js"></script>
+</body></html>

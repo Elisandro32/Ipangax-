@@ -1,0 +1,13 @@
+name = "Elisandro"
+age = 20
+
+fn add(int a, int b) -> int {
+    return a + b
+}
+
+result = add(10, 20)
+
+if result > 20 {
+    print(name)
+    print(result)
+}

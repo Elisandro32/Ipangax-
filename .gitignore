@@ -1,0 +1,3 @@
+ipx
+*.o
+tests/run_tests

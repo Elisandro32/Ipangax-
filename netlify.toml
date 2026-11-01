@@ -1,0 +1,23 @@
+[build]
+  publish = "website"
+  functions = "netlify/functions"
+
+[functions]
+  included_files = ["netlify/functions/bin/**"]
+
+[[redirects]]
+  from = "/api/execute"
+  to = "/.netlify/functions/execute"
+  status = 200
+
+[[redirects]]
+  from = "/api/judge"
+  to = "/.netlify/functions/judge"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "same-origin"
+    X-Frame-Options = "DENY"

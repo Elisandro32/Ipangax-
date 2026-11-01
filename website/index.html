@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ipangax</title><meta name="description" content="Ipangax: a programming language inspired by Python, C++ and Rust."><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap"><a class="logo" href="index.html">Ipangax</a><nav><a href="index.html">Home</a><a href="index.html#language">Language</a><a href="docs.html">Documentation</a><a href="playground.html">Playground</a><span class="off" title="Not implemented yet">VS Code (soon)</span><span class="off" title="Not published yet">GitHub (soon)</span></nav><a class="btn" href="playground.html">Try Ipangax</a></div></header>
+<main class="wrap">
+<div class="hero"><h1>Ipangax</h1>
+<p class="tag">Simple syntax.<br>Native performance.<br>Safe by design.</p>
+<p>A programming language inspired by Python, C++ and Rust.</p>
+<div class="btns"><a class="btn" href="playground.html">Try Ipangax</a><a class="btn alt" href="docs.html">Read Documentation</a></div>
+<pre>fn main() {
+    name = "Ipangax"
+    print(name)
+}</pre></div>
+<section id="language"><h2>Language</h2>
+<p>Statements end at a new line. Types are inferred, or written explicitly. Functions declare their types. Arrays, loops and input are built in.</p>
+<pre>name = "Elisandro"
+int age = 20
+const NOTA_MINIMA = 10.0
+
+fn add(int a, int b) -&gt; int {
+    return a + b
+}
+
+if add(10, 20) &gt; 20 {
+    print(name)
+}</pre>
+<p>Type errors point at the exact place:</p>
+<pre>Ipangax Error
+
+main.ipa:3:10
+
+Cannot add values of type 'string' and 'int'.
+
+3 | result = name + age
+             ^^^^^^^^^^
+
+help: Use string(value) to convert the other operand to string.</pre></section>
+<section id="status"><h2>Project status</h2>
+<p>Ipangax is at an early stage (v0.5, draft). This is what exists today.</p>
+<table class="status">
+<tr><td>Lexer, parser, type checker, interpreter (C++17)</td><td class="ok">Implemented</td></tr>
+<tr><td>CLI: ipx run, check, version, help</td><td class="ok">Implemented</td></tr>
+<tr><td>Variables, const, if/else, while, functions</td><td class="ok">Implemented</td></tr>
+<tr><td>Arrays, for, do-while, match, ?:, break/continue, +=, input(), strings, math built-ins</td><td class="ok">Implemented</td></tr>
+<tr><td>Structs, maps, sets, heaps, deques, bit operators, math functions</td><td class="ok">Implemented</td></tr>
+<tr><td>Enums, optional, result, tuples, modules, struct methods</td><td class="no">Not implemented yet</td></tr>
+<tr><td>ipx build, ipx fmt, ipx repl</td><td class="no">Not implemented yet</td></tr>
+<tr><td>Playground (runs the real interpreter on the server, Netlify Function)</td><td class="ok">Implemented</td></tr>
+<tr><td>Playground in the browser via WebAssembly</td><td class="no">Not implemented yet</td></tr>
+<tr><td>VS Code extension, language server</td><td class="no">Not implemented yet</td></tr>
+<tr><td>Native compilation (LLVM)</td><td class="no">Not implemented yet</td></tr>
+</table></section>
+</main>
+<footer><div class="wrap"><p><b>Ipangax</b><br>Programming language and development tools.</p><p><a href="docs.html">Documentation</a><span class="off">GitHub (soon)</span><a href="playground.html">Playground</a><span class="off">VS Code (soon)</span></p><p>Developed by Elisandro Ipanga</p></div></footer>
+<script src="config.js"></script>
+</body></html>

@@ -1,0 +1,60 @@
+:root{--g:#1b7f3b;--ink:#111;--mut:#555;--line:#ddd;--code:#f6f6f6}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{color:var(--g)}
+code,pre{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;font-size:14px}
+pre{background:var(--code);border:1px solid var(--line);padding:14px 16px;overflow-x:auto;margin:16px 0;line-height:1.5}
+:not(pre)>code{background:var(--code);padding:1px 5px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding-top:14px;padding-bottom:14px}
+.logo{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:4px 18px;flex:1}
+nav a{color:var(--ink);text-decoration:none;font-size:15px}
+nav a:hover{color:var(--g)}
+nav .off{color:#999;font-size:15px}
+.btn{display:inline-block;border:1px solid var(--g);background:var(--g);color:#fff;padding:7px 16px;text-decoration:none;font-size:15px}
+.btn.alt{background:#fff;color:var(--g)}
+.hero{padding:72px 0 48px}
+.hero h1{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:48px;margin:0 0 12px}
+.hero .tag{font-size:22px;line-height:1.4;margin:0 0 16px}
+.hero .tag b{color:var(--g);font-weight:600}
+.hero p{color:var(--mut);margin:0 0 24px;max-width:560px}
+.hero .btns{display:flex;gap:12px;flex-wrap:wrap}
+section{padding:32px 0;border-top:1px solid var(--line)}
+h2{font-size:22px;margin:0 0 12px}
+h3{font-size:17px;margin:28px 0 8px}
+.status td,.status th{border-bottom:1px solid var(--line);padding:6px 16px 6px 0;text-align:left;vertical-align:top}
+table{border-collapse:collapse;width:100%;font-size:15px}
+.ok{color:var(--g)}.no{color:var(--mut)}
+.docs{display:flex;gap:40px;padding:32px 0}
+.side{width:200px;flex:none;position:sticky;top:16px;align-self:flex-start;font-size:15px}
+.side a{display:block;color:var(--ink);text-decoration:none;padding:2px 0}
+.side a:hover{color:var(--g)}
+.doc{min-width:0;flex:1}
+.doc section{padding:24px 0 8px}
+.doc section:first-child{border-top:0;padding-top:0}
+.note{border-left:3px solid var(--g);padding:2px 14px;color:var(--mut);margin:16px 0}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:15px;margin-top:32px}
+footer a,footer .off{margin-right:16px}
+footer .off{color:#999}
+@media(max-width:700px){.docs{flex-direction:column;gap:8px}.side{position:static;width:auto;display:flex;flex-wrap:wrap;gap:4px 14px}.hero{padding:40px 0 28px}.hero h1{font-size:36px}}
+.pg{padding:24px 0}
+.pg h2{margin:0 0 4px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.bar button{font:inherit;font-size:15px;border:1px solid var(--g);background:var(--g);color:#fff;padding:6px 16px;cursor:pointer}
+.bar button.alt{background:#fff;color:var(--g)}
+.bar button:disabled{opacity:.5;cursor:default}
+#st{color:var(--mut);font-size:14px;margin-left:8px}
+.ide{display:flex;border:1px solid var(--line)}
+.files{width:140px;flex:none;border-right:1px solid var(--line);padding:10px;font-size:14px;color:var(--mut)}
+.files b{display:block;color:var(--ink);font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:400;border-left:2px solid var(--g);padding-left:8px}
+.files small{display:block;margin-top:2px;color:var(--g)}
+.ed{display:flex;flex:1;min-width:0}
+#gutter{margin:0;border:0;background:#fafafa;color:#999;text-align:right;padding:12px 8px;overflow:hidden;line-height:1.5;font-size:14px;min-width:38px}
+#code{flex:1;min-width:0;height:340px;border:0;outline:0;resize:vertical;padding:12px;font:14px/1.5 ui-monospace,Menlo,Consolas,"Courier New",monospace;tab-size:4;white-space:pre;overflow:auto}
+.stdin{width:100%;height:70px;border:1px solid var(--line);padding:8px 12px;font:14px/1.5 ui-monospace,Menlo,Consolas,"Courier New",monospace;resize:vertical}
+.out h3{margin:20px 0 6px}
+.out pre{margin:0;min-height:48px;white-space:pre-wrap}
+#err{border-left:3px solid var(--ink);background:#fff}
+@media(max-width:700px){.files{display:none}#code{height:260px}}

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documentation - Ipangax</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap"><a class="logo" href="index.html">Ipangax</a><nav><a href="index.html">Home</a><a href="index.html#language">Language</a><a href="docs.html">Documentation</a><a href="playground.html">Playground</a><span class="off" title="Not implemented yet">VS Code (soon)</span><span class="off" title="Not published yet">GitHub (soon)</span></nav><a class="btn" href="playground.html">Try Ipangax</a></div></header>
+<main class="wrap docs">
+<nav class="side"><a href="#introduction">Introduction</a><a href="#installation">Installation</a><a href="#hello-world">Hello World</a><a href="#variables">Variables</a><a href="#types">Types</a><a href="#operators">Operators</a><a href="#conditions">Conditions</a><a href="#loops">Loops</a><a href="#functions">Functions</a><a href="#arrays">Arrays</a><a href="#collections">Collections</a><a href="#structs">Structs</a><a href="#errors">Error Handling</a><a href="#modules">Modules</a><a href="#stdlib">Standard Library</a><a href="#cli">CLI</a></nav>
+<div class="doc">
+<section id="introduction"><h2>Introduction</h2>
+<p>Ipangax is a programming language by Elisandro Ipanga. The goal: Python-like simplicity, C++-like performance and Rust-inspired safety, without copying any of them. Source files use the <code>.ipa</code> extension and the command line tool is <code>ipx</code>.</p>
+<p class="note">Version 0.1 is a draft. It runs through a tree-walking interpreter. Native compilation, performance and memory-safety features beyond bounds and overflow checks are goals, not features. Pages below mark what does not exist yet.</p></section>
+
+<section id="installation"><h2>Installation</h2>
+<p>There are no downloads or releases yet. Build from source. You need a C++17 compiler (GCC or Clang) and make.</p>
+<pre>make
+./ipx run examples/mvp.ipa</pre>
+<p>On Windows, use WSL. Source hosting: not published yet. To try code without installing anything, use the <a href="playground.html">Playground</a>.</p></section>
+
+<section id="hello-world"><h2>Hello World</h2>
+<pre>print("Hello, Ipangax")</pre>
+<p>Top-level statements run in order. An optional <code>fn main()</code> runs after them.</p>
+<pre>fn main() {
+    print("Hello, Ipangax")
+}</pre></section>
+
+<section id="variables"><h2>Variables</h2>
+<pre>name = "Ipangax"        // declares, type inferred: string
+int age = 20            // declares with explicit type
+age = age + 1           // assigns
+age += 1                // also -=  *=  /=  %=
+const PI = 3.14159      // immutable</pre>
+<p><code>x = value</code> declares <code>x</code> when no visible variable has that name, otherwise it assigns. The type is fixed at the first assignment. A typed declaration requires an initial value.</p>
+<p>Scope: every <code>{ }</code> block is a scope. Declaring a name twice in the same scope is an error; a typed declaration in an inner scope may shadow an outer variable. Functions see their own parameters and locals plus top-level <code>const</code>s, not other global variables.</p></section>
+
+<section id="types"><h2>Types</h2>
+<table><tr><td><code>int</code></td><td>64-bit signed integer</td></tr><tr><td><code>float</code></td><td>64-bit floating point</td></tr><tr><td><code>string</code></td><td>text</td></tr><tr><td><code>bool</code></td><td><code>true</code> or <code>false</code></td></tr><tr><td><code>char</code></td><td>one byte, written <code>'a'</code></td></tr></table>
+<p>There are no implicit conversions. Use <code>int(x)</code>, <code>float(x)</code> and <code>string(x)</code>. Arrays are written <code>int[]</code>, <code>string[]</code>, <code>int[][]</code> and so on. Maps, sets, heaps, deques and structs are covered below. Enums, optional and result: Not implemented yet.</p></section>
+
+<section id="operators"><h2>Operators</h2>
+<p>From lowest to highest precedence: <code>||</code>, <code>&amp;&amp;</code>, <code>== !=</code>, <code>&lt; &lt;= &gt; &gt;=</code>, <code>+ -</code>, <code>* / %</code>, unary <code>- !</code>.</p>
+<p><code>+ - * /</code> need two ints or two floats; <code>+</code> also joins strings. <code>%</code> needs ints. Integer division truncates toward zero. Integer overflow and division by zero are runtime errors. Compound assignment (<code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>) works on variables, array elements and struct fields.</p>
+<p>Bit operators <code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code> work on ints and bind tighter than comparisons, so <code>x &amp; 1 == 0</code> means <code>(x &amp; 1) == 0</code>. A shift count must be 0 to 63, and a left shift that loses bits is an overflow error.</p></section>
+
+<section id="conditions"><h2>Conditions</h2>
+<pre>if score &gt;= 90 {
+    print("A")
+} else if score &gt;= 70 {
+    print("B")
+} else {
+    print("C")
+}</pre>
+<p>Conditions must be <code>bool</code>. <code>} else {</code> stays on one line.</p>
+<pre>match day {
+    1 { print("Monday") }
+    2, 3 { print("Tuesday or Wednesday") }
+    else { print("other") }
+}
+
+label = n % 2 == 0 ? "even" : "odd"</pre>
+<p><code>match</code> works on int, string, char and bool, runs the first matching arm and has no fall-through. <code>else</code> is optional and last. The ternary <code>c ? a : b</code> needs a <code>bool</code> condition and branches of the same type, and only evaluates the chosen branch.</p></section>
+
+<section id="loops"><h2>Loops</h2>
+<pre>i = 0
+while i &lt; 3 {
+    print(i)
+    i = i + 1
+}</pre>
+<pre>for item in items {        // array elements, or the chars of a string
+    print(item)
+}
+for i in range(5) { }      // 0 to 4
+for i in range(2, 8) { }   // 2 to 7
+for i in range(9, 0, -3) { }
+break
+continue</pre>
+<p><code>range</code> only works inside <code>for</code> and does not build an array. The loop variable exists only in the loop body.</p>
+<pre>do {
+    tries += 1
+} while tries &lt; 3</pre>
+<p><code>do { } while</code> runs the body at least once. There is no C-style <code>for (;;)</code>: use <code>range</code> with a step, or <code>while</code>.</p></section>
+
+<section id="functions"><h2>Functions</h2>
+<pre>fn add(int a, int b) -&gt; int {
+    return a + b
+}
+
+fn greet(string name) {
+    print("Hello " + name)
+}</pre>
+<p>Top level only, any order, recursion allowed, no overloading. A function with a return type must return on every path. <code>main</code> takes no parameters and returns nothing.</p></section>
+
+<section id="arrays"><h2>Arrays</h2>
+<pre>int[] a = [5, 3, 8]
+b = [1, 2, 3]            // inferred int[]
+grid = make(3, make(3, 0))   // 3 x 3 table of zeros
+a[0] = 10
+push(a, 7)
+print(len(a))
+sort(a)</pre>
+<p>All elements share one type. An empty array needs a declared type: <code>int[] a = []</code>. Indexing is bounds-checked: a bad index is a runtime error with line and column, never undefined behavior. Arrays are shared references, like Python lists: <code>b = a</code> makes both names point to the same array. Use <code>copy(a)</code> for an independent copy. Arrays cannot be <code>const</code> yet.</p></section>
+<section id="collections"><h2>Collections</h2>
+<pre>map[string, int] count = {}      // ordered by key
+count["a"] = 1
+x = get(count, "z", 0)           // default for a missing key
+if has(count, "a") { }
+for k in count { print(k) }      // keys in order
+
+set[int] seen = {}
+add(seen, 3)
+s = {1, 2, 3}
+
+heap[int] h = {}                 // min-heap; maxheap[int] for a max-heap
+push(h, 5)
+smallest = pop(h)
+
+deque[int] q = {}                // queue, stack and deque
+push(q, 1)
+push_front(q, 0)
+a = pop_front(q)</pre>
+<p><code>{}</code> is the empty literal for any of these and needs a declared type. Keys and set elements are int, string, char or bool. Reading a missing key is a runtime error. These types are shared references like arrays; <code>copy(c)</code> makes a deep copy. There are no tuples yet: pack two numbers into one int, for example <code>(dist &lt;&lt; 10) | node</code>.</p></section>
+
+<section id="structs"><h2>Structs</h2>
+<pre>struct User {
+    string name
+    int age
+}
+
+u = User(name = "Ana", age = 20)
+v = User("Bo", 30)
+u.age += 1
+print(u)                         // User(name = "Ana", age = 21)
+User[] users = []
+push(users, u)</pre>
+<p>Declared at the top level, one field per line, in any order. Every field must be given when constructing. Structs are shared references: <code>b = a</code> points to the same struct, and <code>copy(a)</code> makes an independent one. A struct cannot contain itself directly (use an array of its own type) and cannot be compared with <code>==</code>. Methods: Not implemented yet.</p></section>
+
+<section id="errors"><h2>Error Handling</h2>
+<p>Compile-time errors show file, line, column, the source line and a caret, and all type errors found are listed. Runtime errors (division by zero, overflow, invalid conversion, index out of bounds, reading past the end of input, call depth above 1000) use the same format and keep output printed before the error. A <code>result</code> type for user-level error handling: Not implemented yet.</p></section>
+
+<section id="modules"><h2>Modules</h2><p>Not implemented yet.</p></section>
+<section id="stdlib"><h2>Standard Library</h2>
+<p>These built-ins exist. Modules and a larger library: Not implemented yet.</p>
+<table><tr><td><code>print(x)</code></td><td>print any value</td></tr>
+<tr><td><code>input()</code></td><td>next line of input, as a string</td></tr>
+<tr><td><code>len(x)</code></td><td>length of a string or array</td></tr>
+<tr><td><code>split(s)</code>, <code>join(a, sep)</code></td><td>split on whitespace, join strings</td></tr>
+<tr><td><code>push(a, v)</code>, <code>pop(a)</code>, <code>copy(a)</code></td><td>array operations</td></tr>
+<tr><td><code>make(n, v)</code></td><td>array of n copies of v</td></tr>
+<tr><td><code>sort(a)</code></td><td>sort in place (int, float, string, char, bool)</td></tr>
+<tr><td><code>min</code>, <code>max</code>, <code>abs</code>, <code>pow</code>, <code>sqrt</code></td><td>math</td></tr>
+<tr><td><code>gcd</code>, <code>lcm</code>, <code>powmod</code></td><td>integer math, overflow checked</td></tr>
+<tr><td><code>floor</code>, <code>ceil</code>, <code>round</code></td><td>float to int</td></tr>
+<tr><td><code>log</code>, <code>log2</code>, <code>log10</code>, <code>exp</code>, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>atan2</code>, <code>PI</code>, <code>E</code></td><td>floating point</td></tr>
+<tr><td><code>has</code>, <code>get</code>, <code>remove</code>, <code>add</code>, <code>keys</code>, <code>values</code>, <code>first</code>, <code>last</code></td><td>maps and sets</td></tr>
+<tr><td><code>top</code>, <code>push_front</code>, <code>pop_front</code>, <code>front</code>, <code>back</code></td><td>heaps and deques</td></tr>
+<tr><td><code>int(x)</code>, <code>float(x)</code>, <code>string(x)</code></td><td>conversions</td></tr></table>
+<pre>n = int(input())
+nums = split(input())
+total = 0
+for word in nums {
+    total = total + int(word)
+}
+print(total)</pre></section>
+
+<section id="cli"><h2>CLI</h2>
+<pre>ipx run main.ipa      check and run (input() reads standard input)
+ipx check main.ipa    check only
+ipx version
+ipx help
+
+ipx run main.ipa --max-steps N   stop after N statements
+ipx run main.ipa --max-array N   limit array length</pre>
+<p>Example: <code>echo "3 4" | ipx run examples/abc_product.ipa</code></p>
+<p><code>ipx build</code>, <code>ipx fmt</code> and <code>ipx repl</code>: Not implemented yet. Exit codes: 0 success, 1 program or compile error, 2 usage error.</p></section>
+</div></main>
+<footer><div class="wrap"><p><b>Ipangax</b><br>Programming language and development tools.</p><p><a href="docs.html">Documentation</a><span class="off">GitHub (soon)</span><a href="playground.html">Playground</a><span class="off">VS Code (soon)</span></p><p>Developed by Elisandro Ipanga</p></div></footer>
+<script src="config.js"></script>
+</body></html>

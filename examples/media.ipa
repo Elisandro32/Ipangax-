@@ -1,0 +1,20 @@
+const NOTA_MINIMA = 10.0
+
+fn media(float a, float b, float c) -> float {
+    return (a + b + c) / 3.0
+}
+
+fn main() {
+    nota1 = 12.5
+    nota2 = 8.0
+    nota3 = 14.0
+
+    m = media(nota1, nota2, nota3)
+    print("Media: " + string(m))
+
+    if m >= NOTA_MINIMA {
+        print("Resultado: aprovado")
+    } else {
+        print("Resultado: reprovado")
+    }
+}

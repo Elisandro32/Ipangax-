@@ -1,0 +1,26 @@
+fn nome_do_dia(int d) -> string {
+    match d {
+        1 {
+            return "segunda"
+        }
+        2, 3 {
+            return "terca ou quarta"
+        }
+        else {
+            return "outro dia"
+        }
+    }
+}
+
+for d in range(1, 5) {
+    print(string(d) + ": " + nome_do_dia(d))
+}
+
+n = 7
+print(n % 2 == 0 ? "par" : "impar")
+
+tentativas = 0
+do {
+    tentativas += 1
+} while tentativas < 3
+print(tentativas)

@@ -1,0 +1,41 @@
+// Shortest paths with a min-heap. Each heap entry packs the distance and the node:
+// distance << 10 | node  (so nodes must be below 1024).
+struct Edge {
+    int to
+    int w
+}
+
+n = 5
+Edge[][] g = []
+for i in range(n) {
+    Edge[] row = []
+    push(g, row)
+}
+push(g[0], Edge(1, 4))
+push(g[0], Edge(2, 1))
+push(g[2], Edge(to = 1, w = 2))
+push(g[1], Edge(3, 1))
+push(g[2], Edge(3, 5))
+push(g[3], Edge(4, 3))
+
+INF = 1000000000
+dist = make(n, INF)
+dist[0] = 0
+heap[int] pq = {}
+push(pq, 0)
+while len(pq) > 0 {
+    cur = pop(pq)
+    d = cur >> 10
+    u = cur & 1023
+    if d > dist[u] {
+        continue
+    }
+    for e in g[u] {
+        nd = d + e.w
+        if nd < dist[e.to] {
+            dist[e.to] = nd
+            push(pq, (nd << 10) | e.to)
+        }
+    }
+}
+print(dist)

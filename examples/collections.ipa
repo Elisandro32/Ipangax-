@@ -1,0 +1,25 @@
+// Word frequencies with a map, unique words with a set, a queue with a deque.
+words = split("the cat and the hat and the bat")
+
+map[string, int] freq = {}
+for w in words {
+    freq[w] = get(freq, w, 0) + 1
+}
+for w in keys(freq) {
+    print(w + ": " + string(freq[w]))
+}
+
+set[string] unique = {}
+for w in words {
+    add(unique, w)
+}
+print(len(unique))
+print(unique)
+
+deque[int] queue = {}
+push(queue, 1)
+push(queue, 2)
+push(queue, 3)
+while len(queue) > 0 {
+    print(pop_front(queue))
+}

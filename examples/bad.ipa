@@ -1,0 +1,8 @@
+name = "Elisandro"
+age = 20
+result = name + age
+int x = "hello"
+print(scor)
+fn f(int a) -> int {
+    print(a)
+}
